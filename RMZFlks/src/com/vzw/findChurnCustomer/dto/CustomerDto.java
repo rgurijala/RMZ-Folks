@@ -28,6 +28,7 @@ public class CustomerDto {
 	}
 	public void setName(String name) {
 		this.name = name;
+		
 	}
 	public String getAccountNumber() {
 		return accountNumber;
