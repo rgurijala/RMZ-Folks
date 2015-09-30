@@ -15,11 +15,7 @@ public class CustomerDto {
 	private String isChurnCustomer;
 	private Date insertedDate;
 	
-	/*public String toString()
-	{
-		
-		//return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}*/
+	
 	
 	public String getMdn() {
 		return mdn;

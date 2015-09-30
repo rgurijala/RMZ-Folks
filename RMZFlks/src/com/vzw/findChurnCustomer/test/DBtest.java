@@ -1,26 +1,22 @@
 package com.vzw.findChurnCustomer.test;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.vzw.findChurnCustomer.dto.CustomerDto;
-import com.vzw.findChurnCustomer.dto.FlotChartVO;
 
 public class DBtest {
 
-	public static final String dbUrl = "jdbc:oracle:thin:@localhost:1521:XE";
+	public static final String dbUrl = "jdbc:oracle:thin:@113.128.163.225:1521:XE";
 	public static final String dbUserName = "rmzfolks";
 	public static final String dbPwd = "rmzfolks";
 	
 	public static void main(String[] args) throws SQLException {
 		// TODO Auto-generated method stub
 		
-		/*DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+		DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 		
 		Connection con = DriverManager.getConnection(dbUrl, dbUserName, dbPwd);
 		
@@ -35,22 +31,22 @@ public class DBtest {
 		}
 		rs.close();
 		stmt.close();
-		con.close();*/
+		con.close();
 		
-		List<CustomerDto> test = getcustomersData();
+		/*List<CustomerDto> test = getcustomersData();
 		String response = "";
 		for(CustomerDto a : test)
 		{
 			response = convertObjToString(a);
 			
 		}
-		
+		*/
 		
 //		System.out.println("test >>>>>>>>>>>> "+test);
 
 	}
 	
-	public static List getcustomersData()
+	/*public static List getcustomersData()
 	{
 		CustomerDto dto = new CustomerDto();
 		Connection con = null;
@@ -68,8 +64,8 @@ public class DBtest {
 			if(rs.next())
 			{
 				dto.setIsChurnCustomer(rs.getString(7));
-				/*if(dto.getIsChurnCustomer().equalsIgnoreCase("Y"))
-				{*/
+				if(dto.getIsChurnCustomer().equalsIgnoreCase("Y"))
+				{
 					dto.setMdn(rs.getString(1));
 					dto.setAccountNumber(rs.getString(2));
 					dto.setName(rs.getString(3));
@@ -99,6 +95,6 @@ public class DBtest {
 		
 		return null;
 		
-	}
+	}*/
 
 }

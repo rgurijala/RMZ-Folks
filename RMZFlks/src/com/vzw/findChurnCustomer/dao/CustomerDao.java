@@ -19,7 +19,7 @@ public class CustomerDao {
 	
 	public List getOffers()
 	{
-		OffersDto dto = new OffersDto();
+		
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -31,10 +31,10 @@ public class CustomerDao {
 			stmt = con.createStatement();
 			rs = stmt.executeQuery("SELECT OFFER_TYPE, OFFER_VALUE FROM USER_OFFERS");
 			offersList = new ArrayList();
-			if(rs.next())
+			while(rs.next())
 			{
-				dto.setOfferType(rs.getString(1));
-				dto.setOfferValue(rs.getString(2));
+				OffersDto dto = new OffersDto();
+				dto.setOffer(rs.getString(1) + " - " + rs.getString(2));
 				offersList.add(dto);
 			}
 			rs.close();
@@ -52,7 +52,7 @@ public class CustomerDao {
 	
 	public List getcustomersData(String accountNum)
 	{
-		CustomerDto dto = new CustomerDto();
+		
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -66,10 +66,9 @@ public class CustomerDao {
 					+ "MOST_USED_FEATURE, DATA_USED, ALLOWANCE, IS_CHURN_CUSTOMER, INSERTED_DATE"
 					+ " FROM USER_DATA WHERE ACCOUNT_NUMBER = '"+accountNum+"'");
 			customerList = new ArrayList();
-			
-			if(rs.next())
+			while(rs.next())
 			{
-				System.out.println("inside");
+				CustomerDto dto = new CustomerDto();
 				dto.setIsChurnCustomer(rs.getString(7));
 				if(dto.getIsChurnCustomer().equalsIgnoreCase("Y"))
 				{
@@ -84,8 +83,6 @@ public class CustomerDao {
 				}
 				
 			}
-			
-			System.out.println(customerList.size());
 			rs.close();
 			stmt.close();
 			con.close();
@@ -101,7 +98,7 @@ public class CustomerDao {
 
 	public List getcustomersDataByMDN(String mdn)
 	{
-		CustomerDto dto = new CustomerDto();
+		
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -112,10 +109,11 @@ public class CustomerDao {
 			con = DriverManager.getConnection(dbUrl, dbUserName, dbPwd);
 			stmt = con.createStatement();
 			rs = stmt.executeQuery("SELECT MDN, ACCOUNT_NUMBER, NAME, "
-					+ "MOST_USED_FEATURE, DATA_USED, ALLOWANCE, IS_CHURN_CUSTOMER FROM USER_DATA where MDN = "+mdn);
+					+ "MOST_USED_FEATURE, DATA_USED, ALLOWANCE, IS_CHURN_CUSTOMER FROM USER_DATA where MDN = '"+mdn+"'");
 			customerList = new ArrayList();
-			if(rs.next())
+			while(rs.next())
 			{
+					CustomerDto dto = new CustomerDto();
 					dto.setMdn(rs.getString(1));
 					dto.setAccountNumber(rs.getString(2));
 					dto.setName(rs.getString(3));
@@ -140,7 +138,7 @@ public class CustomerDao {
 	
 	public List getchurnDataByAcctNum(String accntNum)
 	{
-		ChurnDto dto = new ChurnDto();
+		
 		Connection con = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -150,10 +148,11 @@ public class CustomerDao {
 			DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 			con = DriverManager.getConnection(dbUrl, dbUserName, dbPwd);
 			stmt = con.createStatement();
-			rs = stmt.executeQuery("SELECT SEARCH_STRING, INSERTED_DATE FROM USER_SEARCH_HISTORY WHERE ACCOUNT_NUMBER = "+accntNum);
+			rs = stmt.executeQuery("SELECT SEARCH_STRING, INSERTED_DATE FROM USER_SEARCH_HISTORY WHERE ACCOUNT_NUMBER = '"+accntNum+"'");
 			churnList = new ArrayList();
-			if(rs.next())
+			while(rs.next())
 			{
+					ChurnDto dto = new ChurnDto();
 					dto.setSearchString(rs.getString(1));
 					dto.setInsertedDate(rs.getString(2));
 					churnList.add(dto);

@@ -2,20 +2,15 @@ package com.vzw.findChurnCustomer.dto;
 
 public class OffersDto {
 
-	private String offerType;
-	private String offerValue;
-	
-	public String getOfferType() {
-		return offerType;
+	private String offer;
+
+	public String getOffer() {
+		return offer;
 	}
-	public void setOfferType(String offerType) {
-		this.offerType = offerType;
+
+	public void setOffer(String offer) {
+		this.offer = offer;
 	}
-	public String getOfferValue() {
-		return offerValue;
-	}
-	public void setOfferValue(String offerValue) {
-		this.offerValue = offerValue;
-	}
+
 	
 }

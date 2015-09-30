@@ -28,11 +28,11 @@ public class churnCustomerService {
 	public String getHomePageDetails(String accountNum)
 	{
 		List<CustomerDto> customerList = dao.getcustomersData(accountNum);
-		double gaugeValue = (Double.parseDouble(customerList.get(0).getDataUsed())/Double.parseDouble(customerList.get(0).getAllowance()))*100;
+		Double gaugeValue = (Double.parseDouble(customerList.get(0).getDataUsed())/Double.parseDouble(customerList.get(0).getAllowance()))*100;
 		List<FlotChartVO> flotList = new ArrayList<FlotChartVO>();
 		FlotChartVO vo = new FlotChartVO();
 		BarVO bar = new BarVO();
-		bar.setBarWidth(0.2);
+		bar.setBarWidth(180000);
 		bar.setFill(true);
 		bar.setFillColor("RGB(52,149,253)");
 		bar.setHorizontal(false);
@@ -70,7 +70,7 @@ public class churnCustomerService {
 	{
 		
 		List<CustomerDto> customerList = dao.getcustomersDataByMDN(mdn);
-		int gaugeValue = (Integer.parseInt(customerList.get(0).getDataUsed())/Integer.parseInt(customerList.get(0).getAllowance()))*100;
+		Double gaugeValue = (Double.parseDouble(customerList.get(0).getDataUsed())/Double.parseDouble(customerList.get(0).getAllowance()))*100;
 		List<FlotChartVO> flotList = new ArrayList<FlotChartVO>();
 		FlotChartVO vo = new FlotChartVO();
 		BarVO bar = new BarVO();
@@ -94,7 +94,7 @@ public class churnCustomerService {
 		}
 		vo.setData(totalData);
 		flotList.add(vo);
-		String response = convertToJSON(flotList);
+		String response = convertToJSON(totalData);
 		StringBuffer finalStr = new StringBuffer(response);
 		finalStr.append("&").append(gaugeValue);
 		return finalStr.toString();
@@ -112,8 +112,7 @@ public class churnCustomerService {
 	public String convertToJSON(List list)
 	{
 		ObjectMapper obj = new ObjectMapper();
-		StringBuilder response = new StringBuilder();
-		response.append("[");
+		StringBuilder response = new StringBuilder("[");
 		try {
 			response.append(obj.writeValueAsString(list));
 		} catch (JsonGenerationException e) {

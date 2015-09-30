@@ -1,11 +1,5 @@
 package com.vzw.cutomer.controller;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,21 +27,28 @@ public class VZWCustomController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView showHome(ModelMap model) {
         System.out.println("Enter showHome......................");
-        String accountNum = "bfatugpi"; // Change this to Babus accntnumber 
+        String accountNum = "bfatugpi";  
 		String response = service.getHomePageDetails(accountNum);
-		System.out.println(response);
+		List<ChurnDto> churesponse = service.getchurnDataByAcctNum(accountNum) ;
+		List<OffersDto> offers = service.getOffers() ;
+		model.addAttribute("offers", offers);
 		model.addAttribute("customerList", response);
-		
+		model.addAttribute("churesponse", churesponse);
+		model.addAttribute("highlight", "babu");
 		ModelAndView modelView = new ModelAndView("home");
 		return modelView;
 	}
 	@RequestMapping(value="babu.htm", method = RequestMethod.GET)
 	public ModelAndView HighData(ModelMap model) {
         System.out.println("Enter HighData......................");
-        String accountNum = "bfatugpi"; // Change this to Babus accntnumber 
+        String accountNum = "bfatugpi";  
 		String response = service.getHomePageDetails(accountNum);
-		
+		List<ChurnDto> churesponse = service.getchurnDataByAcctNum(accountNum) ;
+		List<OffersDto> offers = service.getOffers() ;
+		model.addAttribute("offers", offers);
 		model.addAttribute("customerList", response);
+		model.addAttribute("churesponse", churesponse);
+		
 		model.addAttribute("highlight", "babu");
 		ModelAndView modelView = new ModelAndView("babu");
 		return modelView;
@@ -55,10 +56,13 @@ public class VZWCustomController {
 	@RequestMapping(value="soban.htm", method = RequestMethod.GET)
 	public ModelAndView mediumData(ModelMap model) {
         System.out.println("Enter mediumData......................");
-        String accountNum = "ng7627se"; // Change this to Sobans accntnumber 
+        String accountNum = "ng7627se";  
 		String response = service.getHomePageDetails(accountNum);
-		
+		List<ChurnDto> churesponse = service.getchurnDataByAcctNum(accountNum) ;
+		List<OffersDto> offers = service.getOffers() ;
+		model.addAttribute("offers", offers);
 		model.addAttribute("customerList", response);
+		model.addAttribute("churesponse", churesponse);
 		model.addAttribute("highlight", "soban");
 		ModelAndView modelView = new ModelAndView("soban");
 		return modelView;
@@ -69,7 +73,11 @@ public class VZWCustomController {
         String accountNum = "bwzs8kk6";  
 		String response = service.getHomePageDetails(accountNum);
 		
+		List<ChurnDto> churesponse = service.getchurnDataByAcctNum(accountNum) ;
+		List<OffersDto> offers = service.getOffers() ;
+		model.addAttribute("offers", offers);
 		model.addAttribute("customerList", response);
+		model.addAttribute("churesponse", churesponse);
 		model.addAttribute("highlight", "rama");
 		ModelAndView modelView = new ModelAndView("rama");
 		return modelView;
@@ -86,21 +94,21 @@ public class VZWCustomController {
 		return modelView;
 	}*/
 	
-	@RequestMapping(value = "/getChurnData")
+	/*@RequestMapping(value = "/getChurnData")
 	public @ResponseBody Map<String, Object> getChurnData(ModelMap model, @RequestParam String accountNumber) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		List<ChurnDto> response = service.getchurnDataByAcctNum(accountNumber) ;
 		resultMap.put("churnList", response);
 		return resultMap;
-	}
+	}*/
 	
-	@RequestMapping(value = "/getOffers")
+	/*@RequestMapping(value = "/getOffers")
 	public @ResponseBody Map<String, Object> getOffers(ModelMap model) {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		List<OffersDto> response = service.getOffers() ;
 		resultMap.put("offersList", response);
 		return resultMap;
-	}
+	}*/
 	
 	@RequestMapping(value = "/getcustomersDataByMDN")
 	@ResponseBody public String getcustomersDataByMDN(ModelMap model, @RequestParam String mdn) {

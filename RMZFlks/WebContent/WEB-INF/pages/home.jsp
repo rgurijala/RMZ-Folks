@@ -201,28 +201,28 @@ $(document).ready(function(){
 	<ul>
 	
 	
-		<li><a href="#Babu">Babu</a></li>
+		<li><a href="#Babu">956-600-4545</a></li>
 		 
 		
 	
-		<li><a href="#Soban">Soban</a></li>
+		<li><a href="#Soban">944-349-3932</a></li>
 		 
 		
 	
-		<li><a href="#Rama">Rama</a></li>
+		<li><a href="#Rama">805-671-0965</a></li>
 		 
 		
 	</ul>
 	
-	<div id="Babu"  style="width:1800px;height:800px;"> Babu
+	<div id="Babu"  style="width:1800px;height:800px;"> Customer Name: Babu
 	
 	<div id="datausageholder" style="width:50%;height:50%;"></div>
 	<div id="gaugeholder" style="margin-left:1200px;margin-top:-380px;width:40%;height:40%;"></div>
 	</div>
  	
-	<div id="Soban"> Soban</div>
+	<div id="Soban"> Customer Name: Soban</div>
  	
-	<div id="Rama"> Rama</div>
+	<div id="Rama"> Customer Name: Rama</div>
  	
 </div>
 
