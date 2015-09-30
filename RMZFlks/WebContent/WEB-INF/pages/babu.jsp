@@ -5,6 +5,9 @@
 	<meta charset="utf-8">
 	<title>jQuery UI Example Page</title>
 	<link href="/RMZFlks/resources/css/jquery-ui.css" rel="stylesheet">
+	 
+	 <link href="/RMZFlks/resources/css/dataTables.jqueryui.min.css" rel="stylesheet"> 
+	
 	  
 <script src="/RMZFlks/resources/js/jquery-1.9.1.js"></script>
 <script src="/RMZFlks/resources/js/jquery-migrate-1.2.1.js"></script>	  
@@ -25,6 +28,8 @@
 <script src="/RMZFlks/resources/js/justgage-1.1.0.js"></script>
 <script src="/RMZFlks/resources/js/raphael-2.1.4.min.js"></script>
 
+<script src="/RMZFlks/resources/js/jquery.dataTables.min.js"></script>
+<script src="/RMZFlks/resources/js/dataTables.jqueryui.min.js"></script>
 
 <script>
 $(document).ready(function(){
@@ -172,8 +177,59 @@ var options = {
 	 }],
 	 startAnimationTime:3000,
 	 refreshAnimationTime:3000
- });	
+ });
+ $("#divdeps").dialog({
+	    autoOpen: false,
+	    show: 'pop',
+	    resizable: false,
+	    position: 'center',
+	    stack: true,
+	    height: 'auto',
+	    width: 'auto',
+	    modal: true
+	}); 
+	 $("#offers").dialog({
+		    autoOpen: false,
+		    show: 'pop',
+		    resizable: false,
+		    position: 'center',
+		    stack: true,
+		    height: 'auto',
+		    width: 'auto',
+		    modal: true
+		}); 
+	 $("#confirm").dialog({
+		    autoOpen: false,
+		    show: 'pop',
+		    resizable: false,
+		   
+		    stack: true,
+		    height: 'auto',
+		    width: 'auto',
+		    modal: true
+		});
+	 $("#sendOfferId").click(function(){
+		  
+		 var tst = $('input[type=radio][name=radiobutton]:checked').attr('id');
+			
+		 $("#offers").dialog('close');
+		 $("#confirm").dialog('close');
+		 $("#confirm").dialog('open');
+		 $("#confirm").html(tst +" is sent to the customer!");
+	 })
+	 $("#chounkbutton").click(function(){
+		 $("#offers").dialog('close');
+		 $("#divdeps").dialog('open');
+		 $('#chunk').DataTable();
+	 })	
+	  $("#Offersbutton").click(function(){
+		  $("#divdeps").dialog('close');
+		 $("#offers").dialog('open');
+		 $('#offerTab').DataTable();
+	 })
+	 
 });
+ 
 </script>
 <style>
 .ui-widget-header {
@@ -186,6 +242,10 @@ var options = {
 .ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
     color: #b00000;
 }   
+.chunkbuttonClass{
+background:#980000;
+color:#FFF;
+} 
 </style>
 </head>
 <body>
@@ -194,7 +254,6 @@ var options = {
 	<div style="width:45%;float:left;text-align:left;"><img src="/RMZFlks/resources/css/images/verizonnewicon.png"></div>
 	<div style="width:50%;float:left;"><h2 class="demoHeaders">Potencial Chunk Customers</h2></div>
 </div>
-
 <div style="clear:both;"></div>
 <div id="tabs">
 	<ul>
@@ -215,10 +274,10 @@ var options = {
 		
 	</ul>
 	
-	<div id="Babu" style="width:1800px;height:800px;"> Customer Name: Babu
+	<div id="Babu" style="width:100%;height:350px;float:left;"> Customer Name: Babu
 	
-	<div id="datausageholderbabu" style="width:50%;height:50%;"></div>
-	<div id="gaugeholderbabu" style="margin-left:1200px;margin-top:-380px;width:40%;height:40%;"></div>
+	<div id="datausageholderbabu" style="width:50%;height:100%;float:left;"></div>
+	<div id="gaugeholderbabu" style="width:50%;height:100%;float:left;"></div>
 	</div>
  	
 	<div id="Soban"> Customer Name: Soban</div>
@@ -226,7 +285,28 @@ var options = {
 	<div id="Rama"> Customer Name: Rama</div>
  	
 </div>
-
-
+<div style="clear:both;"></div>
+<div style="float:left;width:50%;text-align:right;padding-top:10px;"><input id="chounkbutton" class="chunkbuttonClass" type="button" value="View Details"> </div>
+<div style="float:left;width:50%;text-align:left;padding-top:10px;"><input id="Offersbutton" class="chunkbuttonClass" type="button" value="Offers"> </div>
+<div id="divdeps" style="display:none" title="Churn Data">
+<table id='chunk'><thead><tr><th>Date</th> <th>Search String</th></tr></thead>
+<tfoot><tr><th>Date</th><th>Search String</th></tr></tfoot>
+<tbody>
+<c:forEach items="${churesponse}" var="chrunk">
+<tr><td width="20%">${chrunk.insertedDate}</td><td width="80%">${chrunk.searchString}</td></tr>
+	</c:forEach>
+	</tbody></table>
+</div>
+<div id="offers" style="display:none" title="Churn Data">
+<table id='offerTab'><thead><tr><th>Offers</th> <th>Select</th></tr></thead>
+<tfoot><tr><th>Offers</th><th>Select</th></tr></tfoot>
+<tbody>
+<c:forEach items="${offers}" var="offerBean">
+<tr><td width="70%">${ offerBean.offer}</td><td width="30%"><input id="${ offerBean.offer}" name="radiobutton" class="chunkbuttonClass" type="radio" > </td></tr>
+	</c:forEach>
+	</tbody></table>
+	<div><input id="sendOfferId" class="chunkbuttonClass" type="button" value="Send Offers"> </div>
+</div>
+<div id="confirm" style="display:none" title="Offer Sent"></div>
 </body>
 </html>
