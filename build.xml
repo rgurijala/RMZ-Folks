@@ -6,27 +6,27 @@
 	
 
 	<path id="compile.classpath">
-		<fileset dir="WebContent/WEB-INF/lib">
+		<fileset dir="RMZ-Folks/WebContent/WEB-INF/lib">
 			<include name="*.jar"/>
 		</fileset>
 	</path>
 	
 	<target name="init" depends="clean">
-		<mkdir dir="build/classes"/>
+		<mkdir dir="RMZ-Folks/build/classes"/>
 		<mkdir dir="dist" />
 	</target>
 	
 	<target name="compile" depends="init" >
-		<javac destdir="build/classes" debug="true" srcdir="src" includeantruntime="false">
+		<javac destdir="RMZ-Folks/build/classes" debug="true" srcdir="src" includeantruntime="false">
 			<classpath refid="compile.classpath"/>
 		</javac>
 	</target>
 	
 	<target name="war" depends="compile">
-		<war destfile="dist/ChurnModel.war" webxml="WebContent/WEB-INF/web.xml">
-			<fileset dir="WebContent"/>
-			<lib dir="WebContent/WEB-INF/lib"/>
-			<classes dir="build/classes"/>
+		<war destfile="dist/ChurnModel.war" webxml="RMZ-Folks/WebContent/WEB-INF/web.xml">
+			<fileset dir="RMZ-Folks/WebContent"/>
+			<lib dir="RMZ-Folks/WebContent/WEB-INF/lib"/>
+			<classes dir="RMZ-Folks/build/classes"/>
 		</war>
 	</target>
 	
