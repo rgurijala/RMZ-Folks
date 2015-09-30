@@ -1,2 +1,6 @@
 language: java
+<<<<<<< HEAD
 script: ant init
+=======
+install: ant deps
+>>>>>>> refs/remotes/origin/master
