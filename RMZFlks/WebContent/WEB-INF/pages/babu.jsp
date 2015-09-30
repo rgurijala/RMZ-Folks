@@ -194,6 +194,7 @@ var options = {
 	<div style="width:45%;float:left;text-align:left;"><img src="/RMZFlks/resources/css/images/verizonnewicon.png"></div>
 	<div style="width:50%;float:left;"><h2 class="demoHeaders">Potencial Chunk Customers</h2></div>
 </div>
+
 <div style="clear:both;"></div>
 <div id="tabs">
 	<ul>
