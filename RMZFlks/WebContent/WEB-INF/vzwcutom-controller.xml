@@ -25,6 +25,13 @@
 		</property>
 	</bean>
 	
+	<bean class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="dataSource">
+	    <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+	    <property name="url" value="jdbc:oracle:thin:@113.128.163.225:1521:XE" />
+	    <property name="username" value="rmzfolks" />
+	    <property name="password" value="rmzfolks" />
+	</bean>
+	
 	<bean class="com.vzw.findChurnCustomer.dao.CustomerDao" id="dao"> </bean>
 
 
